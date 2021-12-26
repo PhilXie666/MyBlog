@@ -83,25 +83,30 @@
                 <a-layout-content
                         :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
                 >
-                    这里是标题<br/>
-                    这里是发布时间<br/><br/><br/><br/><br/><br/><br/>
-                    这里是文章内容
+                    <a-card
+                            :title="article.title"
+                    >
+                        <!--发布时间-->
+                        <a-card-meta
+                                :description="article.publishTime"
+                        >
+                        </a-card-meta>
+                            <br />
+                            <br />
+                        <!--文章具体内容-->
+                        <div id="article_content">
+                        <a-card-meta
+                                :description="article.content"
+                        >
+                        </a-card-meta></div>
+                    </a-card>
                 </a-layout-content>
             </a-layout>
         </a-layout>
     </a-layout>
 </template>
-<script>
-    export default {
-        data() {
-            return {
-                collapsed: false,
-            };
-        },
-    };
-</script>
 
-<style>
+<style scoped>
     #components-layout-demo-top-side-2 .logo {
         width: 120px;
         height: 31px;
@@ -109,13 +114,45 @@
         margin: 16px 28px 16px 0;
         float: left;
     }
+    #article_content {
+        color: black;
+    }
+
 </style>
 
 
 
 <script>
     export default {
-        name: "Index.vue"
+        name: "Index.vue",
+        data() {
+            return {
+                collapsed: false,
+                // 文章
+                article: {
+                    title: "",// 文章标题
+                    publish_time: "",// 发布时间
+                    content: "",// 文章内容
+                },
+            };
+        },
+        created() {
+            this.getNewestArticle()
+        },
+        methods: {
+            // 获取最新的一篇文章
+            getNewestArticle() {
+                var that = this
+                this.$axios.get("http://localhost:8081/article/getNewestArticle").then(function (res) {
+                    if (res.data.success) {
+                        console.log("获取最新的一篇文章……")
+                        console.log(res.data)
+                        that.article = res.data.data;// 文章对象直接赋值
+                    }
+
+                })
+            }
+        }
     }
 </script>
 

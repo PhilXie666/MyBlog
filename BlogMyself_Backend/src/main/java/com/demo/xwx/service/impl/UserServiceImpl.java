@@ -1,7 +1,8 @@
-package com.demo.xwx.service;
+package com.demo.xwx.service.impl;
 
 import com.demo.xwx.entity.User;
 import com.demo.xwx.mapper.UserMapper;
+import com.demo.xwx.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

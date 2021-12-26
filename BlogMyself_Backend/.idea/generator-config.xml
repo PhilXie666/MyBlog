@@ -3,6 +3,34 @@
   <component name="PersistentConfig">
     <option name="historyConfigList">
       <map>
+        <entry key="article">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="ArticleDao" />
+              <option name="daoPackage" value="com.demo.xwx.mapper" />
+              <option name="daoPostfix" value="Dao" />
+              <option name="daoTargetFolder" value="$PROJECT_DIR$" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Article" />
+              <option name="modelPackage" value="com.demo.xwx.entity" />
+              <option name="modelTargetFolder" value="$PROJECT_DIR$" />
+              <option name="name" value="article" />
+              <option name="needToStringHashcodeEquals" value="true" />
+              <option name="offsetLimit" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="id" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="article" />
+              <option name="useExample" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="com.demo.xwx.mapper" />
+              <option name="xmlTargetFolder" value="$PROJECT_DIR$" />
+            </Config>
+          </value>
+        </entry>
         <entry key="user">
           <value>
             <Config>
