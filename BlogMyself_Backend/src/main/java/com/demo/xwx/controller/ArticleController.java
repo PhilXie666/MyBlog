@@ -18,7 +18,6 @@ public class ArticleController {
     private ArticleService articleService;
 
     @GetMapping("/getNewestArticle")
-    @CrossOrigin("http://localhost:8080")
     public Result getNewestArticle() {
         Article article = articleService.getNewestArticle();
         System.out.println("最新的一篇文章");
