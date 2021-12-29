@@ -18,4 +18,10 @@ public class ArticleServiceImpl implements ArticleService {
         return articleDao.getNewestArticle();
     }
 
+    // 保存一篇文章
+    @Override
+    public Integer saveArticle(Article article) {
+        return articleDao.insert(article);
+    }
+
 }

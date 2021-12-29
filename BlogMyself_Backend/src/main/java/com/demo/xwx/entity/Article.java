@@ -5,9 +5,10 @@ import java.util.Date;
 
 /**
  * article
- * @author 
+ * @author
  */
 public class Article implements Serializable {
+
     /**
      * 文章id
      */
@@ -34,6 +35,21 @@ public class Article implements Serializable {
     private String content;
 
     private static final long serialVersionUID = 1L;
+
+    public Article(String title, Date publishTime, Date editTime, String content) {
+        this.title = title;
+        this.publishTime = publishTime;
+        this.editTime = editTime;
+        this.content = content;
+    }
+
+    public Article(String id, String title, Date publishTime, Date editTime, String content) {
+        this.id = id;
+        this.title = title;
+        this.publishTime = publishTime;
+        this.editTime = editTime;
+        this.content = content;
+    }
 
     public String getId() {
         return id;

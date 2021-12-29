@@ -151,9 +151,9 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.demo.xwx.entity.Article" useGeneratedKeys="true">
-    insert into article (title, publish_time, edit_time,
+    insert into article (id, title, publish_time, edit_time,
       content)
-    values (#{title,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP},
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{editTime,jdbcType=TIMESTAMP},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.demo.xwx.entity.Article" useGeneratedKeys="true">

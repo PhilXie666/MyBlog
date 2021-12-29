@@ -109,9 +109,14 @@
 
                         <!--文章具体内容-->
                         <!--<img src="../static/000001.png">-->
+
+                        <!--<div id="article_content_id">
+                            ${}
+                        </div>-->
+
                         <div v-html="article_content_html">
 
-                            <!--<img src="000001.png">-->
+
                         </div>
 
                     </a-card>
@@ -169,7 +174,9 @@
                         console.log(res.data)
                         that.article = res.data.data;// 文章对象直接赋值
 
-                        that.insertAnArtPictures(that.article.id)
+                        that.article_content_html = that.article.content
+
+                        // that.insertAnArtPictures(that.article.id)
                     }
 
                 })
