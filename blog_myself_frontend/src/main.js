@@ -15,6 +15,10 @@ Vue.prototype.$axios = axios
 const router = new VueRouter({
   routes: [
     {path: "/login",component:Login},
+    /*{
+      path: '/index',
+      component: Index,
+    }*/
     {
       path: '/index',
       component: Index,

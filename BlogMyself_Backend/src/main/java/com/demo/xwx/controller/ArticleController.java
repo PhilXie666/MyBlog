@@ -2,13 +2,13 @@ package com.demo.xwx.controller;
 
 import com.demo.xwx.common.Result;
 import com.demo.xwx.entity.Article;
+import com.demo.xwx.entity.ArticlePicture;
+import com.demo.xwx.service.ArticlePictureService;
 import com.demo.xwx.service.ArticleService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/article")
@@ -16,6 +16,9 @@ public class ArticleController {
 
     @Resource
     private ArticleService articleService;
+
+    @Resource
+    private ArticlePictureService articlePictureService;
 
     @GetMapping("/getNewestArticle")
     public Result getNewestArticle() {
@@ -27,4 +30,53 @@ public class ArticleController {
         return res;
     }
 
+    @GetMapping("/selectAnArtPictures")
+    public Result selectAnArtPictures(@RequestParam("id") String id) {
+        List<ArticlePicture> articlePictures = articlePictureService.selectAnArtPictures(id);
+        Result res = new Result(true, "200", "查询成功", articlePictures);
+
+        return res;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

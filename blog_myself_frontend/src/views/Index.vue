@@ -1,4 +1,5 @@
 <template>
+
     <a-layout id="components-layout-demo-top-side-2">
         <a-layout-header class="header">
             <div class="logo" />
@@ -94,16 +95,31 @@
                             <br />
                             <br />
                         <!--文章具体内容-->
-                        <div id="article_content">
+                        <!--<div id="article_content">
                         <a-card-meta
                                 :description="article.content"
                         >
-                        </a-card-meta></div>
+                        </a-card-meta></div>-->
+                        <!--<div>
+                            <p>
+                            </p>
+                            &lt;!&ndash;<div v-html="img_html"></div>
+                            <img src="000001.png">&ndash;&gt;
+                        </div>-->
+
+                        <!--文章具体内容-->
+                        <!--<img src="../static/000001.png">-->
+                        <div v-html="article_content_html">
+
+                            <!--<img src="000001.png">-->
+                        </div>
+
                     </a-card>
                 </a-layout-content>
             </a-layout>
         </a-layout>
     </a-layout>
+
 </template>
 
 <style scoped>
@@ -133,7 +149,11 @@
                     title: "",// 文章标题
                     publish_time: "",// 发布时间
                     content: "",// 文章内容
+
+                    // 文章的图片
+                    pictures: []
                 },
+                article_content_html: "<h1>这是测试</h1>"
             };
         },
         created() {
@@ -148,11 +168,94 @@
                         console.log("获取最新的一篇文章……")
                         console.log(res.data)
                         that.article = res.data.data;// 文章对象直接赋值
+
+                        that.insertAnArtPictures(that.article.id)
                     }
 
                 })
+            },
+
+            // 在文章中的文字中插入这篇文章的所有图片
+            insertAnArtPictures(article_id) {
+                var that = this
+                this.$axios.get("http://localhost:8081/article/selectAnArtPictures", {
+                    params: {
+                        id: article_id
+                    }
+                }).then(function (res) {
+                    that.article["pictures"] = res.data.data;
+
+                    that.composeArticleContent()
+
+                    console.log("一篇文章的所有图片信息……")
+                    console.log(that.article["pictures"])
+                    // that.img_html = "<img src=\"" + "000001.png"+ "\">"
+                })
+            },
+
+            // 文章具体内容拼接
+            composeArticleContent() {
+                var article_content = this.article.content
+                var len = this.article.pictures.length
+                for (let i = 0; i < len; i++) {// 处理文章的每张图片
+                    let img_str = "</p>" + "{img[" + i + "]}" + "<p>"
+                    article_content = this.insertStr(article_content, this.article.pictures[i].wordsNum, img_str)
+                    // 所有图片在文章中的位置往后挪（插入的{img[i]}长度为8）
+                    this.movePicPositions(i, img_str.length)
+                }
+                // 替换{img[i]}为每张图片具体的img标签
+                for (let i = 0; i < len; i++) {
+                    let img_str = "{img[" + i + "]}"
+                    let img_real_path = "<img width='800px' src=\"" + this.article.pictures[i].path + "\">"
+                    article_content = article_content.replace(img_str, img_real_path)
+                }
+                // 完善未配对的</p>或<p>标签
+                // 也就是在字符串article_content开头位置插入<p>标签，在
+                // article_content结尾位置插入</p>标签
+                article_content = this.insertStr(article_content, 0, "<p>")
+                article_content = this.insertStr(article_content, article_content.length, "</p>")
+
+                // 赋值给html
+                this.article_content_html = article_content
+
+                console.log("插入图片后的文章内容……")
+                console.log(article_content)
+            },
+
+            // 在字符串指定位置插入字符串
+            insertStr(soure, start, newStr){
+                return soure.slice(0, start) + newStr + soure.slice(start)
+            },
+
+            // 所有图片在文章中的位置往后挪
+            // pic_index: 文章内容拼接到了第几张图片
+            // move_num: 图片位置的移动量
+            movePicPositions(pic_index, move_num) {
+                var len = this.article.pictures.length
+                for (var i = pic_index + 1; i < len; i++) {
+                    this.article.pictures[i].wordsNum += move_num
+                }
             }
         }
     }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
